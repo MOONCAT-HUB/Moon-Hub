@@ -8,3 +8,4 @@ O MoonCat Brookhaven é a evolução definitiva para o jogo, utilizando a tecnol
 "A nova era da MoonLib focada em Brookhaven" [cite: 2026-02-25]
 📥 Como Usar
 Para carregar o script no seu executor (Delta, Fluxus, etc.), utilize o comando oficial abaixo:
+https://raw.githubusercontent.com/MOONCAT-HUB/Moon-Hub/main/moonbrook.lua
