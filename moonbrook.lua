@@ -1,66 +1,75 @@
 --[[
     --------------------------------------------------------------
     MOON HUB | BY MOON CAT
-    Biblioteca: moonbrook.lua (Integrated Edition)
-    Propriedade: Redz
+    Link: https://raw.githubusercontent.com/MOONCAT-HUB/Moon-Hub/main/moonbrook.lua
     --------------------------------------------------------------
 ]]
 
--- Carregando a base da UI com suporte a animações
+-- Carregando a interface Fluent (Uma das melhores com animações)
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
-local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
-local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
--- Configuração da Janela com Animação
+-- Criando a janela principal com efeito de desfoque e animação
 local Window = Fluent:CreateWindow({
     Title = "Moon Hub | By Moon Cat",
     SubTitle = "moonbrook.lua",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 460),
-    Acrylic = true, -- Efeito de desfoque (Blur) atrás do menu
+    Acrylic = true, 
     Theme = "Dark",
-    MinimizeKey = Enum.KeyCode.LeftControl -- Tecla para esconder o menu
+    MinimizeKey = Enum.KeyCode.LeftControl
 })
 
--- Abas do Hub
+-- Abas do Menu
 local Tabs = {
     Main = Window:AddTab({ Title = "Principal", Icon = "home" }),
+    Scripts = Window:AddTab({ Title = "Redz Integrado", Icon = "code" }),
     Settings = Window:AddTab({ Title = "Configurações", Icon = "settings" })
 }
 
--- 1. SEÇÃO REDZ (SCRIPTS INTEGRADOS)
-Tabs.Main:AddParagraph({
-    Title = "Redz Property",
-    Content = "Scripts exclusivos integrados ao Moon Hub."
+-- 1. NOTIFICAÇÃO DE ABERTURA (ANIMAÇÃO)
+Fluent:Notify({
+    Title = "Moon Hub",
+    Content = "Bem-vindo de volta, MoonCat!",
+    SubContent = "Biblioteca moonbrook.lua carregada",
+    Duration = 5
 })
 
-Tabs.Main:AddButton({
-    Title = "Executar Redz Scripts",
-    Description = "Carrega as funções da Redz no jogo atual",
+-- 2. ABA PRINCIPAL
+Tabs.Main:AddParagraph({
+    Title = "Status do Sistema",
+    Content = "O Moon Hub está rodando perfeitamente.\nPropriedade de Moon Cat e Redz."
+})
+
+-- 3. ABA REDZ (ONDE VOCÊ VAI INTEGRAR SEUS SCRIPTS)
+Tabs.Scripts:AddSection("Scripts da Redz")
+
+Tabs.Scripts:AddButton({
+    Title = "Carregar Módulos Redz",
+    Description = "Executa a integração total com a Redz",
     Callback = function()
         Window:Dialog({
-            Title = "Redz System",
-            Content = "Iniciando integração Redz...",
+            Title = "Integração",
+            Content = "Deseja injetar os scripts Redz agora?",
             Buttons = {
                 {
-                    Title = "Confirmar",
+                    Title = "Sim",
                     Callback = function()
-                        print("Redz scripts executados!")
-                        -- O seu script bruto da Redz entraria aqui
+                        print("Redz Injetado!")
+                        -- Cole aqui o código bruto da Redz se quiser que ele rode ao clicar
                     end
                 },
-                {
-                    Title = "Cancelar"
-                }
+                { Title = "Não" }
             }
         })
     end
 })
 
--- 2. FUNÇÕES DE JOGADOR (EXEMPLO COM TWEEN ANIMATION)
+-- 4. FUNÇÕES DE PLAYER (COM SLIDERS ANIMADOS)
+Tabs.Main:AddSection("Modificações de Jogador")
+
 Tabs.Main:AddSlider("WalkSpeed", {
-    Title = "Velocidade do Personagem",
-    Description = "Ajuste a velocidade com suavidade",
+    Title = "Velocidade",
+    Description = "Aumenta a velocidade do boneco",
     Default = 16,
     Min = 16,
     Max = 300,
@@ -70,21 +79,5 @@ Tabs.Main:AddSlider("WalkSpeed", {
     end
 })
 
--- 3. ANIMAÇÃO DE NOTIFICAÇÃO AO CARREGAR
-Fluent:Notify({
-    Title = "Moon Hub",
-    Content = "A biblioteca moonbrook.lua foi carregada com sucesso!",
-    SubContent = "By Moon Cat",
-    Duration = 5
-})
-
--- Finalização
-SaveManager:SetLibrary(Fluent)
-InterfaceManager:SetLibrary(Fluent)
-SaveManager:IgnoreThemeSettings()
-SaveManager:SetIgnoreIndexes({})
-InterfaceManager:BuildInterfaceSection(Tabs.Settings)
+-- Selecionar a primeira aba ao abrir
 Window:SelectTab(1)
-
-print("Moon Hub | By Moon Cat carregado!")
-
